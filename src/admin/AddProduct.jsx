@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+
 
 function AddProduct() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
+  const [allCategories, setAllCategories] = useState([]);
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState("");
+
+  useEffect(()=>{
+    axios.get("http://localhost:8080/admin/category")
+    .then((result)=>{
+      console.log(result)
+      setAllCategories(result.data)
+    })
+  },[])
+
+
+
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -52,11 +66,23 @@ function AddProduct() {
           name="category"
           id="category"
           value={category}
+          defaultValue={"select"}
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option value="">Select Category</option>
-          <option value="clothing">Clothing</option>
-          <option value="electronics">Electronics</option>
+      
+
+
+
+<option value="select" disabled >Select Category</option>
+
+{
+  allCategories.map((products,index)=>{
+return (
+ 
+<option  value={products.categoryName} key={index}>{products.categoryName}</option>)
+  })
+}
+         
         </select>
         <br />
         <label htmlFor="">Description</label>

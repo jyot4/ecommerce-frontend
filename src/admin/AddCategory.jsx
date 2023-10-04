@@ -3,12 +3,14 @@ import axios from "axios";
 
 function AddCategory() {
   const [name, setName] = useState("");
+  const [subcat, setSubcat] = useState("");
   const [photo, setPhoto] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("subcat", subcat);
     formData.append("photo", photo);
     axios
       .post("http://localhost:8080/admin/category/add", formData, {
@@ -33,6 +35,13 @@ function AddCategory() {
           onChange={(e) => setName(e.target.value)}
         />
         <br />
+        <label htmlFor="">Subcategory Name</label>
+        <input
+          type="text"
+          placeholder="Sub Category Name"
+          value={subcat}
+          onChange={(e) => setSubcat(e.target.value)}
+        />
         <label htmlFor="">Photo</label>
         <input
           type="file"
