@@ -11,7 +11,7 @@ const [listofProduct ,setListofProduct] = useState([])
     console.log("priya")
     axios.get("http://localhost:8080/products")
     .then((result)=>{
-// console.log(result.data)
+console.log(result.data)
 
 setListofProduct(result.data)
 
@@ -42,7 +42,7 @@ setListofProduct(result.data)
     return(
       <div>
       <h1 key={index}>{lists.name}</h1>
-     <img src={"http://localhost:8080/" + lists.photo.path.split("//")[0] + "/" + lists.photo.path.split("//")[1]} alt='avaliable'/>
+     <img src={`http://localhost:8080/uploads/products/${lists.photo.filename}`} alt='avaliable'/>
         </div>
     )
  
